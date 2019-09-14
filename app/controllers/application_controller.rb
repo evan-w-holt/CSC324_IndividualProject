@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
   def homePage
-    render html: "[ Insert website here ]"
+    redirect_to static_pages_home_url
   end
 end
