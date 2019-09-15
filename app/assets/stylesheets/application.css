@@ -13,3 +13,39 @@
  *= require_tree .
  *= require_self
  */
+
+html {
+  background-color: rgb(229, 207, 180);
+}
+
+div.navbarBox {
+  width: 100%;
+  min-height: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: rgba(0, 0, 0, 0.15);
+  border-width: 2px;
+  border-style: solid;
+  border-color: black;
+}
+
+div.navbarRightButtons {
+  min-height: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+a.navbarTextButton {
+  margin: 0;
+  display: flex;
+  color: transparent;
+}
+
+.navbarText {
+  margin: 0 1rem;
+  color: black;
+}
