@@ -32,17 +32,48 @@
         <%= image_tag ("L.png"), class: "consonantImg" %>
       </div>
     </div>
+    <div class="edigaulWord">
+      <div class="edigaulUnit">
+        <%= image_tag ("oh.png"), class: "topVowelImg" %>
+        <%= image_tag ("SP.png"), class: "consonantImg" %>
+      </div>
+    </div>
+    <div class="edigaulWord">
+      <div class="edigaulUnit">
+        <%= image_tag ("R.png"), class: "consonantImg" %>
+      </div>
+      <div class="edigaulUnit">
+        <%= image_tag ("aw.png"), class: "topVowelImg" %>
+        <%= image_tag ("K.png"), class: "consonantImg" %>
+      </div>
+      <div class="edigaulUnit">
+        <%= image_tag ("Sh.png"), class: "consonantImg" %>
+        <%= image_tag ("ee.png"), class: "bottomVowelImg" %>
+      </div>
+    </div>
   </div>
 
   <h4>Random Rohkshe Word</h4>
   <table>
     <tr>
-      <td>Rohkshe <p style="font-size: 8px;">(TODO: make this look like sample above)</p></td>
+      <td>Rohkshe</td>
       <td>English Transliteration</td>
       <td>English Translation</td>
     </tr>
     <tr>
-      <td><%= @rohkshe %></td>
+      <td>
+        <div class="edigaulTextBox">
+          <div class="edigaulWord">
+            <% @rohkshe.each do |letter| %>
+            <div class="edigaulUnit">
+              <%= get_vowel_img(letter[0], "topVowelImg") %>
+              <%= image_tag ("#{letter[1]}.png"), class: "consonantImg" %>
+              <%= get_vowel_img(letter[2], "bottomVowelImg") %>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </td>
       <td><%= @transliteration %></td>
       <td><%= @translation %></td>
     </tr>
