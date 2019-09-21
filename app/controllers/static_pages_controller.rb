@@ -1,7 +1,6 @@
 class StaticPagesController < ApplicationController
 
-  # At some point I'll figure out a better way to store these
-  # so I can have a lot of words at my disposal
+  # At some point I'll figure out a better way to store these so I can have a lot of words at my disposal
   ALL_ROHKSHE = {
     :Edigaul => ["Edigaul", [["eh", "D", nil], ["ih", "G", nil], ["aw", "L", nil]]],
     :Rohkshe => ["Rohkshe", [[nil, "R", nil], ["aw", "K", nil], [nil, "Sh", "ee"]]],
@@ -21,19 +20,9 @@ class StaticPagesController < ApplicationController
     :that => ["kahsh", [[nil, "K", nil], ["ah", "Sh", nil]]],
     :and => ["oh", [["oh", "SP", nil]]]
   }
-  ALL_WORDS = [
-    :Edigaul, :Rohkshe,
-    :water, :river, :ocean,
-    :'to have', :'to be',
-    :hello, :goodbye,
-    :I, :you,
-    :one, :two, :three,
-    :this, :that,
-    :and
-  ]
 
   def home
-    @translation = ALL_WORDS.sample
+    @translation = ALL_ROHKSHE.keys.sample
 
     random_word = ALL_ROHKSHE[@translation]
     @transliteration = random_word[0]
