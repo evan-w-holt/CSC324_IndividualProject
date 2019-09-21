@@ -5,3 +5,46 @@
 .pageText {
   margin: 0 23vw;
 }
+
+table, td {
+  padding: 5px;
+  border: 1.5px solid black;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+div.edigaulTextBox {
+  display: flex;
+  justify-content: center;
+}
+
+div.edigaulWord {
+  margin-right: 6px;
+  display: flex;
+  justify-content: center;
+}
+
+div.edigaulUnit {
+  position: relative;
+}
+
+img.consonantImg {
+  max-height: 30px;
+}
+
+img.topVowelImg {
+  max-height: 30px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+img.bottomVowelImg {
+  max-height: 30px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  transform: scaleY(-1);
+}
