@@ -3,55 +3,55 @@
 <center>
   <h3>Welcome to the Edigaul Abugida Text Tool!</h3>
 
-  <div class="edigaulTextBox">
-    <div class="edigaulWord">
+  <span class="edigaulTextBox">
+    <span class="edigaulWord">
       <%= image_tag ("K.png"), class: "consonantImg" %>
-      <div class="edigaulUnit">
+      <span class="edigaulUnit">
         <%= image_tag ("ih.png"), class: "topVowelImg" %>
         <%= image_tag ("Sh.png"), class: "consonantImg" %>
-      </div>
-    </div>
-    <div class="edigaulWord">
-      <div class="edigaulUnit">
+      </span>
+    </span>
+    <span class="edigaulWord">
+      <span class="edigaulUnit">
         <%= image_tag ("eh.png"), class: "topVowelImg" %>
         <%= image_tag ("K.png"), class: "consonantImg" %>
         <%= image_tag ("ie.png"), class: "bottomVowelImg" %>
-      </div>
-    </div>
-    <div class="edigaulWord">
-      <div class="edigaulUnit">
+      </span>
+    </span>
+    <span class="edigaulWord">
+      <span class="edigaulUnit">
         <%= image_tag ("eh.png"), class: "topVowelImg" %>
         <%= image_tag ("D.png"), class: "consonantImg" %>
-      </div>
-      <div class="edigaulUnit">
+      </span>
+      <span class="edigaulUnit">
         <%= image_tag ("ih.png"), class: "topVowelImg" %>
         <%= image_tag ("G.png"), class: "consonantImg" %>
-      </div>
-      <div class="edigaulUnit">
+      </span>
+      <span class="edigaulUnit">
         <%= image_tag ("aw.png"), class: "topVowelImg" %>
         <%= image_tag ("L.png"), class: "consonantImg" %>
-      </div>
-    </div>
-    <div class="edigaulWord">
-      <div class="edigaulUnit">
+      </span>
+    </span>
+    <span class="edigaulWord">
+      <span class="edigaulUnit">
         <%= image_tag ("oh.png"), class: "topVowelImg" %>
         <%= image_tag ("SP.png"), class: "consonantImg" %>
-      </div>
-    </div>
-    <div class="edigaulWord">
-      <div class="edigaulUnit">
+      </span>
+    </span>
+    <span class="edigaulWord">
+      <span class="edigaulUnit">
         <%= image_tag ("R.png"), class: "consonantImg" %>
-      </div>
-      <div class="edigaulUnit">
+      </span>
+      <span class="edigaulUnit">
         <%= image_tag ("aw.png"), class: "topVowelImg" %>
         <%= image_tag ("K.png"), class: "consonantImg" %>
-      </div>
-      <div class="edigaulUnit">
+      </span>
+      <span class="edigaulUnit">
         <%= image_tag ("Sh.png"), class: "consonantImg" %>
         <%= image_tag ("ee.png"), class: "bottomVowelImg" %>
-      </div>
-    </div>
-  </div>
+      </span>
+    </span>
+  </span>
 
   <h4>Random Rohkshe Word</h4>
   <table>
@@ -62,17 +62,17 @@
     </tr>
     <tr>
       <td>
-        <div class="edigaulTextBox">
-          <div class="edigaulWord">
+        <span class="edigaulTextBox">
+          <span class="edigaulWord">
             <% @rohkshe.each do |letter| %>
-            <div class="edigaulUnit">
+            <span class="edigaulUnit">
               <%= get_vowel_img(letter[0], "topVowelImg") %>
               <%= image_tag ("#{letter[1]}.png"), class: "consonantImg" %>
               <%= get_vowel_img(letter[2], "bottomVowelImg") %>
-            </div>
+            </span>
             <% end %>
-          </div>
-        </div>
+          </span>
+        </span>
       </td>
       <td><%= @transliteration %></td>
       <td><%= @translation %></td>
