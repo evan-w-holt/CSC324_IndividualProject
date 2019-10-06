@@ -1,5 +1,5 @@
 class Word < ApplicationRecord
-  before_save { self.rohkshe = rohkshe.downcase}
+  before_save { self.rohkshe = rohkshe.downcase }
 
   ROHKSHE_FORMAT_REGEX = /\A(\[\w{0,3}\+\w{1,2}\+\w{0,3}\])+\z/i
 

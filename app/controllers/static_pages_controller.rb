@@ -57,6 +57,17 @@ class StaticPagesController < ApplicationController
     @transliteration = random_word[0]
     @rohkshe = convert_rohkshe_string_into_array(random_word[1])
     @translation = @translation.to_s
+
+    this_is_edigaul_and_rohkshe_unconverted = [
+      Word.find_by(translation: "this").rohkshe,
+      Word.find_by(translation: "to be").rohkshe,
+      Word.find_by(translation: "Edigaul").rohkshe,
+      Word.find_by(translation: "and").rohkshe,
+      Word.find_by(translation: "Rohkshe").rohkshe
+    ]
+    @this_is_edigaul_and_rohkshe = this_is_edigaul_and_rohkshe_unconverted.map {
+      |str| convert_rohkshe_string_into_array(str)
+    }
   end
 
   def about
