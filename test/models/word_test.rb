@@ -8,6 +8,12 @@ class WordTest < ActiveSupport::TestCase
       translation: "river"
     )
 
+    @valid_upcase = Word.new(
+      rohkshe: "[+K+UH][+TH+][+N+EE]",
+      transliteration: "kuthni",
+      translation: "river"
+    )
+
     @no_rohkshe = Word.new(
       rohkshe: "     ",
       transliteration: "kuthni",
@@ -37,6 +43,12 @@ class WordTest < ActiveSupport::TestCase
 
   test "valid word should be valid" do
     assert @valid_word.valid?
+  end
+
+  test "upcase rohkshe should be saved as downcase" do
+    expected_downcase = "[+k+uh][+th+][+n+ee]"
+    @valid_upcase.save
+    assert_equal expected_downcase, @valid_upcase.rohkshe
   end
 
   test "missing rohkshe should be invalid" do
