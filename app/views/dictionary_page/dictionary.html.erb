@@ -2,5 +2,31 @@
 
 <center>
   <h3>Rohkshe Dictionary</h3>
-  <p>[ Dictionary table here ]</p>
+  <table>
+    <tr>
+      <td>Rohkshe</td>
+      <td>English Transliteration</td>
+      <td>English Translation</td>
+    </tr>
+
+    <% @all_words_displayable.each do |word| %>
+    <tr>
+      <td>
+        <span class="edigaulTextBox">
+          <span class="edigaulWord">
+            <% word[0].each do |letter| %>
+            <span class="edigaulUnit">
+              <%= get_vowel_img(letter[0], "topVowelImg") %>
+              <%= image_tag ("#{letter[1]}.png"), class: "consonantImg" %>
+              <%= get_vowel_img(letter[2], "bottomVowelImg") %>
+            </span>
+            <% end %>
+          </span>
+        </span>
+      </td>
+      <td><%= word[1] %></td>
+      <td><%= word[2] %></td>
+    </tr>
+    <% end %>
+  </table>
 </center>
