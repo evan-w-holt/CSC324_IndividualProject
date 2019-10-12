@@ -30,7 +30,7 @@ class StaticPagesController < ApplicationController
     return working_array
   end
 
-  ALL_ROHKSHE = {
+  SAMPLE_ROHKSHE = {
     :Edigaul => ["Edigaul", "[eh+d+][ih+g+][aw+l+]"],
     :Rohkshe => ["Rohkshe", "[+r+][aw+k+][+sh+ee]"],
     :water => ["ithni", "[ih+th+][+n+ee]"],
@@ -51,9 +51,9 @@ class StaticPagesController < ApplicationController
   }
 
   def home
-    @translation = ALL_ROHKSHE.keys.sample
+    @translation = SAMPLE_ROHKSHE.keys.sample
 
-    random_word = ALL_ROHKSHE[@translation]
+    random_word = SAMPLE_ROHKSHE[@translation]
     @transliteration = random_word[0]
     @rohkshe = convert_rohkshe_string_into_array(random_word[1])
     @translation = @translation.to_s

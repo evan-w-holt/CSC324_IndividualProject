@@ -3,6 +3,8 @@ require 'test_helper'
 class StaticPagesControllerTest < ActionDispatch::IntegrationTest
 
   def setup
+    Rails.application.load_seed
+
     @site_title = "Edigaul Abugida"
 
     @home_url = "/"

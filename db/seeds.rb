@@ -6,7 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-ROHKSHE = {
+# Note to self: the ||= makes sure ROHKSHE hasn't already been declared,
+#   otherwise we get warning spam when running tests
+ROHKSHE ||= {
   :Edigaul => ["Edigaul", "[eh+d+][ih+g+][aw+l+]"],
   :Rohkshe => ["Rohkshe", "[+r+][aw+k+][+sh+ee]"],
   :water => ["ithni", "[ih+th+][+n+ee]"],
