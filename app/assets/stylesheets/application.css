@@ -49,3 +49,46 @@ a.navbarTextButton {
   margin: 0 1rem;
   color: black;
 }
+
+table, td {
+  padding: 5px;
+  border: 1.5px solid black;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+span.edigaulTextBox {
+  display: flex;
+  justify-content: center;
+}
+
+span.edigaulWord {
+  margin-right: 6px;
+  display: flex;
+  justify-content: center;
+}
+
+span.edigaulUnit {
+  position: relative;
+}
+
+img.consonantImg {
+  max-height: 30px;
+}
+
+img.topVowelImg {
+  max-height: 30px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+img.bottomVowelImg {
+  max-height: 30px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  transform: scaleY(-1);
+}
