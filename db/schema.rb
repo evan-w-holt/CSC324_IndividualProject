@@ -10,9 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20191006010843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "words", force: :cascade do |t|
+    t.string "rohkshe"
+    t.string "transliteration"
+    t.string "translation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end

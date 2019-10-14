@@ -1,33 +1,43 @@
 class StaticPagesController < ApplicationController
 
-  # At some point I'll figure out a better way to store these so I can have a lot of words at my disposal
-  ALL_ROHKSHE = {
-    :Edigaul => ["Edigaul", [["eh", "D", nil], ["ih", "G", nil], ["aw", "L", nil]]],
-    :Rohkshe => ["Rohkshe", [[nil, "R", nil], ["aw", "K", nil], [nil, "Sh", "ee"]]],
-    :water => ["ithni", [["ih", "Th", nil], [nil, "N", "ee"]]],
-    :river => ["kuthni", [[nil, "K", "uh"], [nil, "Th", nil], [nil, "N", "ee"]]],
-    :ocean => ["muuthni", [[nil, "M", "uuh"], [nil, "Th", nil], [nil, "N", "ee"]]],
-    :'to have' => ["helai", [[nil, "H", nil], ["eh", "L", "ie"]]],
-    :'to be' => ["ekai", [["eh", "K", "ie"]]],
-    :hello => ["oyseh", [["oh", "Y", nil], [nil, "S", "eh"]]],
-    :goodbye => ["vastin", [[nil, "V", nil], ["ah", "S", nil], [nil, "T", nil], ["ih", "N", nil]]],
-    :I => ["zai", [[nil, "Z", "ie"]]],
-    :you => ["zo", [[nil, "Z", "oh"]]],
-    :one => ["sikla", [[nil, "S", nil], ["ih", "K", nil], [nil, "L", "uh"]]],
-    :two => ["pulta", [[nil, "P", nil], ["oo", "L", nil], [nil, "T", "uh"]]],
-    :three => ["treena", [[nil, "T", nil], [nil, "R", "ee"], [nil, "N", "uh"]]],
-    :this => ["kish", [[nil, "K", nil], ["ih", "Sh", nil]]],
-    :that => ["kahsh", [[nil, "K", nil], ["ah", "Sh", nil]]],
-    :and => ["oh", [["oh", "SP", nil]]]
+  SAMPLE_ROHKSHE = {
+    :Edigaul => ["Edigaul", "[eh+d+][ih+g+][aw+l+]"],
+    :Rohkshe => ["Rohkshe", "[+r+][aw+k+][+sh+ee]"],
+    :water => ["ithni", "[ih+th+][+n+ee]"],
+    :river => ["kuthni", "[+k+uh][+th+][+n+ee]"],
+    :ocean => ["muuthni", "[+m+uuh][+th+][+n+ee]"],
+    :'to have' => ["helai", "[+h+][eh+l+ie]"],
+    :'to be' => ["ekai", "[eh+k+ie]"],
+    :hello => ["oyseh", "[oh+y+][+s+eh]"],
+    :goodbye => ["vastin", "[+v+][ah+s+][+t+][ih+n+]"],
+    :I => ["zai", "[+z+ie]"],
+    :you => ["zo", "[+z+oh]"],
+    :one => ["sikla", "[+s+][ih+k+][+l+uh]"],
+    :two => ["pulta", "[+p+][oo+l+][+t+uh]"],
+    :three => ["treena", "[+t+][+r+ee][+n+uh]"],
+    :this => ["kish", "[+k+][ih+sh+]"],
+    :that => ["kahsh", "[+k+][ah+sh+]"],
+    :and => ["oh", "[oh+sp+]"]
   }
 
   def home
-    @translation = ALL_ROHKSHE.keys.sample
+    @translation = SAMPLE_ROHKSHE.keys.sample
 
-    random_word = ALL_ROHKSHE[@translation]
+    random_word = SAMPLE_ROHKSHE[@translation]
     @transliteration = random_word[0]
-    @rohkshe = random_word[1]
+    @rohkshe = helpers.convert_rohkshe_string_into_array(random_word[1])
     @translation = @translation.to_s
+
+    this_is_edigaul_and_rohkshe_unconverted = [
+      Word.find_by(translation: "this").rohkshe,
+      Word.find_by(translation: "to be").rohkshe,
+      Word.find_by(translation: "Edigaul").rohkshe,
+      Word.find_by(translation: "and").rohkshe,
+      Word.find_by(translation: "Rohkshe").rohkshe
+    ]
+    @this_is_edigaul_and_rohkshe = this_is_edigaul_and_rohkshe_unconverted.map {
+      |str| helpers.convert_rohkshe_string_into_array(str)
+    }
   end
 
   def about
