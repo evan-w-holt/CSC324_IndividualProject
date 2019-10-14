@@ -3,8 +3,6 @@ require 'test_helper'
 class StaticPagesControllerTest < ActionDispatch::IntegrationTest
 
   def setup
-    Rails.application.load_seed
-
     @site_title = "Edigaul Abugida"
 
     @home_url = "/"
@@ -61,8 +59,13 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
   test "random word table should exist with headers" do
     get @home_url
 
-    assert_select "td", 6
-    assert_select "td", {:text => "Rohkshe", :count => 1}
+    num_rows = 2
+    num_columns = 3
+
+    assert_select "td", num_rows * num_columns
+
+    # Test that the header row contains the right things
+    assert_select "td", {:text => "Rohkshe Script", :count => 1}
     assert_select "td", {:text => "English Transliteration", :count => 1}
     assert_select "td", {:text => "English Translation", :count => 1}
   end
