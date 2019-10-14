@@ -3,14 +3,21 @@ require 'test_helper'
 class DictionaryPageControllerTest < ActionDispatch::IntegrationTest
 
   def setup
+    @site_title = "Edigaul Abugida"
+
     @dictionary_url = "/dictionary"
   end
 
-  # Page getting tests ==================================================
+  # Page getting/title tests ==================================================
 
   test "should get dictionary" do
     get @dictionary_url
     assert_response :success
+  end
+
+  test "dictionary page should have dictionary in title" do
+    get @dictionary_url
+    assert_select "title", "Dictionary | #{@site_title}"
   end
 
   # Dictionary table tests ==================================================
