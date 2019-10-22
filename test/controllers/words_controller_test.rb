@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class DictionaryControllerTest < ActionDispatch::IntegrationTest
+class WordsControllerTest < ActionDispatch::IntegrationTest
 
   def setup
     @site_title = "Edigaul Abugida"

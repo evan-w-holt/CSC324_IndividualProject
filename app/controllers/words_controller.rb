@@ -1,4 +1,4 @@
-class DictionaryController < ApplicationController
+class WordsController < ApplicationController
 
   def new
     @word = Word.new

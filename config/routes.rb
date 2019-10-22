@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get '/about' => 'static_pages#about'
   get '/help' => 'static_pages#help'
 
-  resources :dictionary, :only => [:new, :create, :index]
+  resources :words, :path => 'dictionary', :only => [:new, :create, :index]
 
   root 'static_pages#home'
 end
