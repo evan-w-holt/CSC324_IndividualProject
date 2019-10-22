@@ -1,13 +1,16 @@
-class DictionaryPageController < ApplicationController
+class DictionaryController < ApplicationController
+
+  def new
+    @word = Word.new
+  end
 
   def create
-    render html: "<script>alert('called')</script>".html_safe
     @word = Word.new(new_word_params)
 
     if @word.save
-      render json: @word, status: :created
+      redirect_to @word
     else
-      render json: @word.errors, status: :unprocessable_entity
+      render 'new'
     end
   end
 
@@ -15,7 +18,8 @@ class DictionaryPageController < ApplicationController
     params.require(:word).permit(:rohkshe, :transliteration, :translation)
   end
 
-  def dictionary
+  def index
+    @word = Word.new
     all_words = Word.all
     
     @all_words_displayable = []
@@ -28,4 +32,6 @@ class DictionaryPageController < ApplicationController
       @all_words_displayable << displayable_word
     end
   end
+
+  render 'new'
 end

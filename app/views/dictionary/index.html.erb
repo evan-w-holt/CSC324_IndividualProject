@@ -32,10 +32,14 @@
   </table>
 
   <h4>Add a Word</h4>
-  <%= form_with model: @word, url: "/create" do |f| %>
-    <%= f.text_field :rohkshe, placeholder: "Rohkshe" %>
-    <%= f.text_field :transliteration, placeholder: "Transliteration" %>
-    <%= f.text_field :translation, placeholder: "Translation" %> <br>
+  <%= form_with model: @word do |f| %>
+
+    <%= f.fields_for :word do |w| %>
+      <%= w.text_field :rohkshe, placeholder: "Rohkshe" %>
+      <%= w.text_field :transliteration, placeholder: "Transliteration" %>
+      <%= w.text_field :translation, placeholder: "Translation" %> <br>
+    <% end %>
+
     <%= f.submit "Add Word" %>
   <% end %>
 </center>
