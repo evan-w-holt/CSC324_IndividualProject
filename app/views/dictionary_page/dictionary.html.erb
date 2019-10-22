@@ -2,6 +2,7 @@
 
 <center>
   <h3>Rohkshe Dictionary</h3>
+
   <table>
     <tr>
       <td>Rohkshe Script</td>
@@ -29,4 +30,12 @@
     </tr>
     <% end %>
   </table>
+
+  <h4>Add a Word</h4>
+  <%= form_with model: @word, url: "/create" do |f| %>
+    <%= f.text_field :rohkshe, placeholder: "Rohkshe" %>
+    <%= f.text_field :transliteration, placeholder: "Transliteration" %>
+    <%= f.text_field :translation, placeholder: "Translation" %> <br>
+    <%= f.submit "Add Word" %>
+  <% end %>
 </center>
