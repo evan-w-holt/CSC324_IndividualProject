@@ -8,9 +8,11 @@ class WordsController < ApplicationController
     @word = Word.new(new_word_params)
 
     if @word.save
+      flash[:success] = "Word \"#{@word.translation} / #{@word.transliteration}\" successfully added!"
       redirect_to @word
     else
-      render :new
+      flash[:word_errors] = @word.errors.full_messages
+      redirect_back fallback_location: root_path
     end
   end
 

@@ -1,10 +1,15 @@
-<h4>Add a Word</h4>
-<%= form_with model: @word do |f| %>
-  <%= render "shared/error_messages" %>
+<p>
+  Example: <br>
+  <i>Rohkshe:</i> <b>[+k+uh][+th+][+n+ee]</b>,
+  <i>Transliteration:</i> <b>kuthni</b>,
+  <i>Translation:</i> <b>river</b>
+</p>
 
+<%= form_with model: @word, class: "addForm" do |f| %>
   <%= f.text_field :rohkshe, placeholder: "Rohkshe" %>
   <%= f.text_field :transliteration, placeholder: "Transliteration" %>
   <%= f.text_field :translation, placeholder: "Translation" %> <br>
+  <%= f.submit "Add Word" %> <br><br>
 
-  <%= f.submit "Add Word" %>
+  <%= render "shared/error_messages" %>
 <% end %>
