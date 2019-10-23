@@ -1,0 +1,13 @@
+<% if @word.errors.any? %>
+  <div id="errorExplanation">
+    <h4>Word could not be added because of <%= pluralize(@word.errors.count, "error") %>:</h4>
+
+    <div>
+      <ul>
+      <% @word.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>

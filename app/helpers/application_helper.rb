@@ -34,4 +34,21 @@ module ApplicationHelper
     end
   end
 
+  def get_all_words_displayable
+    all_words = Word.all
+
+    all_words_displayable = []
+    all_words.each do |word|
+      displayable_word = []
+      displayable_word << convert_rohkshe_string_into_array(word.rohkshe)
+      displayable_word << word.transliteration
+      displayable_word << word.translation
+      displayable_word << word.id
+
+      all_words_displayable << displayable_word
+    end
+
+    return all_words_displayable
+  end
+
 end
