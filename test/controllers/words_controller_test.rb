@@ -26,7 +26,7 @@ class WordsControllerTest < ActionDispatch::IntegrationTest
     get @dictionary_url
 
     num_rows =  Word.all.count + 1 # plus 1 for the header row
-    num_columns = 3
+    num_columns = 4
 
     assert_select "td", num_rows * num_columns
 
@@ -34,6 +34,7 @@ class WordsControllerTest < ActionDispatch::IntegrationTest
     assert_select "td", {:text => "Rohkshe Script", :count => 1}
     assert_select "td", {:text => "English Transliteration", :count => 1}
     assert_select "td", {:text => "English Translation", :count => 1}
+    assert_select "td", {:text => "Options", :count => 1}
   end
 
   # Dictionary add word tests ==================================================

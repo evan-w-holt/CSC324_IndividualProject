@@ -43,6 +43,7 @@ module ApplicationHelper
       displayable_word << convert_rohkshe_string_into_array(word.rohkshe)
       displayable_word << word.transliteration
       displayable_word << word.translation
+      displayable_word << word.id
 
       all_words_displayable << displayable_word
     end

@@ -9,14 +9,16 @@ class WordsController < ApplicationController
 
     if @word.save
       flash[:success] = "Word \"#{@word.translation} / #{@word.transliteration}\" successfully added!"
-      redirect_to @word
+      redirect_to words_url
     else
       render :new
     end
   end
 
-  def show
-    @word = Word.new
+  def destroy
+    deleted_word = Word.find(params[:id]).destroy
+    flash[:success] = "Word \"#{deleted_word.translation} / #{deleted_word.transliteration}\" successfully deleted!"
+    redirect_to words_url
   end
 
   def index

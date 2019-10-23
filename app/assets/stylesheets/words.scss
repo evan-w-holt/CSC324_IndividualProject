@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-form {
+form.addForm {
   margin-bottom: 3rem;
   div {
     margin: 2px;
@@ -15,6 +15,20 @@ form {
       height: 15px;
     }
   }
+}
+
+input.deleteButton {
+  border-style: solid;
+  border-width: 1px;
+  border-color: darkred;
+  border-radius: 5px;
+  color: darkred;
+  background-color: rgba(255, 128, 128, 0.25);
+}
+
+input.deleteButton:hover {
+  border-color: white;
+  color: white;
 }
 
 #errorExplanation {
@@ -43,6 +57,6 @@ form {
     border-color: darkgreen;
     border-radius: 10px;
     color: darkgreen;
-    background-color: rgba(128, 255, 128, 0.5);
+    background-color: rgba(128, 255, 128, 0.25);
   }
 }

@@ -6,12 +6,12 @@
   <i>Translation:</i> <b>river</b>
 </p>
 
-<%= form_for @word do |f| %>
+<%= form_for @word, html: { class: "addForm" } do |f| %>
   <div>
     <%= f.text_field :rohkshe, placeholder: "Rohkshe" %>
     <%= f.text_field :transliteration, placeholder: "Transliteration" %>
     <%= f.text_field :translation, placeholder: "Translation" %>
   </div>
-  
+
   <%= f.submit "Add Word" %>
 <% end %>
