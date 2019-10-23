@@ -6,6 +6,7 @@ class WordsControllerTest < ActionDispatch::IntegrationTest
     @site_title = "Edigaul Abugida"
 
     @dictionary_url = "/dictionary"
+    @word_to_delete = words(:this)
   end
 
   # Page getting/title tests ==================================================
@@ -28,13 +29,12 @@ class WordsControllerTest < ActionDispatch::IntegrationTest
     num_rows =  Word.all.count + 1 # plus 1 for the header row
     num_columns = 4
 
-    assert_select "td", num_rows * num_columns
+    assert_select "td", num_rows * num_columns - 1 # minus 1 as the header has only three rows
 
     # Test that the header row contains the right things
     assert_select "td", {:text => "Rohkshe Script", :count => 1}
     assert_select "td", {:text => "English Transliteration", :count => 1}
     assert_select "td", {:text => "English Translation", :count => 1}
-    assert_select "td", {:text => "Options", :count => 1}
   end
 
   # Dictionary add word tests ==================================================
@@ -73,7 +73,20 @@ class WordsControllerTest < ActionDispatch::IntegrationTest
     end
 
     follow_redirect!
-    assert_template "words/show"
+    assert_template "words/index"
+  end
+  
+  # Dictionary delete word tests ==================================================
+
+  test "delete word should delete word" do
+    get @dictionary_url
+
+    assert_difference "Word.count", -1 do
+      delete word_path(@word_to_delete)
+    end
+
+    follow_redirect!
+    assert_template "words/index"
   end
 
   # Dictionary page edigaul tests ==================================================

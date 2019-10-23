@@ -3,7 +3,6 @@
     <td>Rohkshe Script</td>
     <td>English Transliteration</td>
     <td>English Translation</td>
-    <td>Options</td>
   </tr>
 
   <% get_all_words_displayable.each do |word| %>
@@ -25,7 +24,7 @@
     <td><%= word[2] %></td>
     <td>
       <%= button_to "X",
-        "#{words_url}/#{word[3]}",
+        word_path(word[3]),
         method: :delete,
         class: "deleteButton",
         data: { confirm: "Are you sure you want to delete word #{word[2]} / #{word[1]}?" }
