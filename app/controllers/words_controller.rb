@@ -11,13 +11,12 @@ class WordsController < ApplicationController
       flash[:success] = "Word \"#{@word.translation} / #{@word.transliteration}\" successfully added!"
       redirect_to @word
     else
-      flash[:word_errors] = @word.errors.full_messages
-      redirect_back fallback_location: root_path
+      render :new
     end
   end
 
   def show
-    @word = Word.find(params[:id])
+    @word = Word.new
   end
 
   def index

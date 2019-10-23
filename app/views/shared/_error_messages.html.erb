@@ -1,10 +1,10 @@
-<% if flash[:word_errors] %>
+<% if @word.errors.any? %>
   <div id="errorExplanation">
-    <h4>Word could not be added because of <%= pluralize(flash[:word_errors].count, "error") %>:</h4>
+    <h4>Word could not be added because of <%= pluralize(@word.errors.count, "error") %>:</h4>
 
     <div>
       <ul>
-      <% flash[:word_errors].each do |message| %>
+      <% @word.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>

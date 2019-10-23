@@ -1,3 +1,4 @@
+<h4>Add a Word to the Dictionary</h4>
 <p>
   Example: <br>
   <i>Rohkshe:</i> <b>[+k+uh][+th+][+n+ee]</b>,
@@ -5,11 +6,12 @@
   <i>Translation:</i> <b>river</b>
 </p>
 
-<%= form_with model: @word, class: "addForm" do |f| %>
-  <%= f.text_field :rohkshe, placeholder: "Rohkshe" %>
-  <%= f.text_field :transliteration, placeholder: "Transliteration" %>
-  <%= f.text_field :translation, placeholder: "Translation" %> <br>
-  <%= f.submit "Add Word" %> <br><br>
-
-  <%= render "shared/error_messages" %>
+<%= form_for @word do |f| %>
+  <div>
+    <%= f.text_field :rohkshe, placeholder: "Rohkshe" %>
+    <%= f.text_field :transliteration, placeholder: "Transliteration" %>
+    <%= f.text_field :translation, placeholder: "Translation" %>
+  </div>
+  
+  <%= f.submit "Add Word" %>
 <% end %>
