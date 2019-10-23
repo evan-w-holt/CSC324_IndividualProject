@@ -10,28 +10,20 @@ class WordsController < ApplicationController
     if @word.save
       redirect_to @word
     else
-      render 'new'
+      render :new
     end
   end
 
-  def new_word_params
-    params.require(:word).permit(:rohkshe, :transliteration, :translation)
+  def show
+    @word = Word.find(params[:id])
   end
 
   def index
     @word = Word.new
-    all_words = Word.all
-    
-    @all_words_displayable = []
-    all_words.each do |word|
-      displayable_word = []
-      displayable_word << helpers.convert_rohkshe_string_into_array(word.rohkshe)
-      displayable_word << word.transliteration
-      displayable_word << word.translation
-
-      @all_words_displayable << displayable_word
-    end
   end
 
-  render 'new'
+  private
+  def new_word_params
+    params.require(:word).permit(:rohkshe, :transliteration, :translation)
+  end
 end

@@ -1,0 +1,10 @@
+<h4>Add a Word</h4>
+<%= form_with model: @word do |f| %>
+  <%= render "shared/error_messages" %>
+
+  <%= f.text_field :rohkshe, placeholder: "Rohkshe" %>
+  <%= f.text_field :transliteration, placeholder: "Transliteration" %>
+  <%= f.text_field :translation, placeholder: "Translation" %> <br>
+
+  <%= f.submit "Add Word" %>
+<% end %>
