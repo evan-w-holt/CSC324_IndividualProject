@@ -36,6 +36,45 @@ class WordsControllerTest < ActionDispatch::IntegrationTest
     assert_select "td", {:text => "English Translation", :count => 1}
   end
 
+  # Dictionary add word tests ==================================================
+
+  test "invalid word should fail" do
+    get @dictionary_url
+
+    parameters = {
+      word: {
+        rohkshe: "invalid",
+        transliteration: "invalid",
+        translation: "invalid"
+      }
+    }
+
+    assert_no_difference "Word.count" do
+      post @dictionary_url, params: parameters
+    end
+
+    assert_template "words/new"
+  end
+
+  test "valid word should be added" do
+    get @dictionary_url
+
+    parameters = {
+      word: {
+        rohkshe: "[ih+z+uh]",
+        transliteration: "iza",
+        translation: "large"
+      }
+    }
+
+    assert_difference "Word.count", 1 do
+      post @dictionary_url, params: parameters
+    end
+
+    follow_redirect!
+    assert_template "words/show"
+  end
+
   # Dictionary page edigaul tests ==================================================
 
   test "each edigaul text box should contain at least one edigaul word" do
