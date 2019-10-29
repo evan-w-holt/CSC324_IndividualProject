@@ -24,78 +24,78 @@ class Converter
 
   def initialize(input)
     @input = input.downcase
-    @englishLetters = @input.split(",").reject(&:empty?)
-    @englishVowels = {}
-    @edigaulLetters = {}
+    @english_letters = @input.split(",").reject(&:empty?)
+    @english_vowels = {}
+    @edigaul_letters = {}
 
-    @englishLetters.each_with_index do |l, i|
+    @english_letters.each_with_index do |l, i|
       if (!VOWELS.include(l))
-        isUptail = UPTAILS.include(l)
+        is_uptail = UPTAILS.include(l)
 
         # Ensure letter is valid
-        if (!isUptail && !DOWNTAILS.include(l) && l != MORPHEME_BREAK)
+        if (!is_uptail && !DOWNTAILS.include(l) && l != MORPHEME_BREAK)
           @error = "Invalid character #{l}"
           return
         end
 
-        letter = Letter.new(l, isUptail, i.to_f)
-        @edigaulLetters[i.to_f] = letter
+        letter = Letter.new(l, is_uptail, i.to_f)
+        @edigaul_letters[i.to_f] = letter
       else
-        @englishVowels[i.to_f] = l
+        @english_vowels[i.to_f] = l
       end
     end
 
-    edigaulKeys = @edigaulLetters.keys.sort
-    prevL = nil
+    edigaul_keys = @edigaul_letters.keys.sort
+    prev_l = nil
 
     # Add the beginning and middle vowel marks
-    edigaulKeys.each do |i|
-      thisL = @edigaulLetters[i]
+    edigaul_keys.each do |i|
+      this_l = @edigaul_letters[i]
 
-      starting = (prevL ? prevL.index + 1 : 0).floor
-      ending = thisL.index.floor
-      vowels = getVowels(starting, ending)
+      starting = (prev_l ? prev_l.index + 1 : 0).floor
+      ending = this_l.index.floor
+      vowels = get_vowels(starting, ending)
 
-      firstL  = (!prevL || prevL.isMorphemeBreak || prevL.consonant == "x") ? nil : prevL
-      secondL = (!thisL || thisL.isMorphemeBreak || thisL.consonant == "x") ? nil : thisL
+      first_l  = (!prev_l || prev_l.is_morpheme_break || prev_l.consonant == "x") ? nil : prev_l
+      second_l = (!this_l || this_l.is_morpheme_break || this_l.consonant == "x") ? nil : this_l
 
       if (vowels.length > 0)
-        success = assignVowels(firstL, secondL, vowels, (starting.to_f + ending) / 2)
+        success = assign_vowels(first_l, second_l, vowels, (starting.to_f + ending) / 2)
 
         if (!success)
-          @error = "Error assigning vowel marks between consonants #{prevL.consonant} and #{thisL.consonant}"
+          @error = "Error assigning vowel marks between consonants #{prev_l.consonant} and #{this_l.consonant}"
           return
         end
       end
 
-      prevL = thisL
+      prev_l = this_l
     end
 
     # Add the remaining vowel marks
-    starting = (prevL ? prevL.index + 1 : 0).floor
+    starting = (prev_l ? prev_l.index + 1 : 0).floor
     ending = -1
-    vowels = getVowels(starting, ending)
+    vowels = get_vowels(starting, ending)
 
     if (vowels.length > 0)
-      success = assignVowels(prevL, nil, vowels, starting.to_f + 1)
+      success = assign_vowels(prev_l, nil, vowels, starting.to_f + 1)
 
       if (!success)
-        @error "Error assigning vowel marks after consonant #{prevL.consonant}"
+        @error "Error assigning vowel marks after consonant #{prev_l.consonant}"
         return
       end
     end
   end
 
   # Gets the Edigaul that this converter object has generated from its input
-  def getEdigaul
+  def get_edigaul
     if (@error)
       return @error
     else
       edigaul = ""
 
-      letterKeysInOrder = @edigaulLetters.keys.sort
-      letterKeysInOrder.each do |i|
-        edigaul += @edigaulLetters[i].getFullLetter
+      edigaul_keys = @edigaul_letters.keys.sort
+      edigaul_keys.each do |i|
+        edigaul += @edigaul_letters[i].get_full_letter
       end
 
       return edigaul
@@ -104,28 +104,28 @@ class Converter
 
   # Gets the vowels to be placed between two letters
   private
-  def getVowels(starting, ending)
+  def get_vowels(starting, ending)
     vowels = []
 
     if (ending != -1)
       for i in starting..(ending - 1)
-        v = @englishVowels[i]
+        v = @english_vowels[i]
         
         if (v)
           vowels << v
-          @englishVowels.delete(i)
+          @english_vowels.delete(i)
         end
       end
     else
       # Get all remaining vowels
       i = starting
 
-      while (@englishVowels.length > 0)
-        v = @englishVowels[i]
+      while (@english_vowels.length > 0)
+        v = @english_vowels[i]
         
         if (v)
           vowels << v
-          @englishVowels.delete(i)
+          @english_vowels.delete(i)
         end
 
         i++
@@ -137,7 +137,7 @@ class Converter
 
   # Assigns vowels, returns whether or not the operation was successful
   private
-  def assignVowels(firstL, secondL, vowels, midIndex)
+  def assign_vowels(first_l, second_l, vowels, mid_index)
     # Check vowel validity
     vowels.each do |vowel|
       if (!VOWELS.include(vowel))
@@ -145,76 +145,76 @@ class Converter
       end
     end
 
-    if (firstL && secondL)
+    if (first_l && second_l)
       # Both letters can take vowel marks
       if (vowels.length == 1)
-        return oneVowelTwoLetters(firstL, secondL, vowels[0])
+        return one_vowel_two_letters(first_l, second_l, vowels[0])
       elsif (vowels.length == 2)
-        return twoVowelsTwoLetters(firstL, secondL, vowels)
+        return two_vowels_two_letters(first_l, second_l, vowels)
       else
-        return multipleVowelsTwoLetters(firstL, secondL, vowels)
+        return multiple_vowels_two_letters(first_l, second_l, vowels)
       end
-    elsif (!firstL && !secondL)
+    elsif (!first_l && !second_l)
       # Neither letter can take vowel marks, add placeholders (sp)
-      return multipleVowelsNoLetters(midIndex, vowels)
+      return multiple_vowels_no_letters(mid_index, vowels)
     else
       # Only one letter can take vowel marks
       if (vowels.length == 1)
-        return oneVowelOneLetter(firstL, secondL, vowels[0])
+        return one_vowel_one_letter(first_l, second_l, vowels[0])
       else
-        return multipleVowelsOneLetter(firstl, secondL, vowels)
+        return multiple_vowels_one_letter(first_l, second_l, vowels)
       end
     end
   end
 
   # Places one vowel between two viable letters, returns success
   private
-  def oneVowelTwoLetters(firstL, secondL, vowel)
-    if (secondL.uptail)
-      # First, if secondL is an uptail, place the vowel above secondL
-      return placeAbove(secondL, vowel)
-    elsif (firstL.uptail)
-      # Second, if firstL is an uptail, place the vowel below firstL
-      return placeBelow(firstL, vowel)
+  def one_vowel_two_letters(first_l, second_l, vowel)
+    if (second_l.uptail)
+      # First, if second_l is an uptail, place the vowel above second_l
+      return place_above(second_l, vowel)
+    elsif (first_l.uptail)
+      # Second, if first_l is an uptail, place the vowel below first_l
+      return place_below(first_l, vowel)
     else
-      # Finally, both must be downtails, place the vowel above secondL
-      return placeAbove(secondL, vowel)
+      # Finally, both must be downtails, place the vowel above second_l
+      return place_above(second_l, vowel)
     end
   end
 
   # Places two vowels between two viable letters, returns success
   private
-  def twoVowelsTwoLetters(firstL, secondL, vowels)
+  def two_vowels_two_letters(first_l, second_l, vowels)
     vowel1 = vowels[0]
     vowel2 = vowels[1]
 
-    return placeAbove(secondL, vowel2) && placeBelow(firstL, vowel1)
+    return place_above(second_l, vowel2) && place_below(first_l, vowel1)
   end
 
   # Places multiple vowels between two viable letters, adding placeholders, returns success
   private
-  def multipleVowelsTwoLetters(firstL, secondL, vowels)
+  def multiple_vowels_two_letters(first_l, second_l, vowels)
     # Place the first vowel below the available first letter
-    success = placeBelow(firstL, vowels[0])
+    success = place_below(first_l, vowels[0])
     if (!success)
       return false
     end
 
     # Add placeholders with vowels attached after the first letter
-    prevPlaceholder = nil
+    prev_placeholder = nil
     for i in 1..(vowels.length - 2)
-      if (!prevPlaceholder || i % 2 == 1)
+      if (!prev_placeholder || i % 2 == 1)
         # Make a new placeholder
-        nextIndex = !prevPlaceholder ? firstL.index + 0.5 : (prevPlaceholder.index + secondL.index) / 2
-        prevPlaceholder = Letter.new("sp", true, nextIndex)
-        @edigaulLetters[nextIndex] = prevPlaceholder
+        next_index = !prev_placeholder ? first_l.index + 0.5 : (prev_placeholder.index + second_l.index) / 2
+        prev_placeholder = Letter.new("sp", true, next_index)
+        @edigaul_letters[next_index] = prev_placeholder
 
-        success = placeAbove(prevPlaceholder, vowels[i])
+        success = place_above(prev_placeholder, vowels[i])
         if (!success)
           return false
         end
       else
-        success = placeBelow(prevPlaceholder, vowels[i])
+        success = place_below(prev_placeholder, vowels[i])
         if (!success)
           return false
         end
@@ -222,66 +222,66 @@ class Converter
     end
 
     # Add the last vowel
-    if (prevPlaceholder.vowelAvailable(BOTTOM))
-      return oneVowelTwoLetters(prevPlaceholder, secondL, vowels[vowels.length - 1])
+    if (prev_placeholder.vowel_available(BOTTOM))
+      return one_vowel_two_letters(prev_placeholder, second_l, vowels[vowels.length - 1])
     else
-      return placeAbove(secondL, vowels[vowels.length - 1])
+      return place_above(second_l, vowels[vowels.length - 1])
     end
   end
 
   # Places one vowel on one viable letter, returns success
   private
-  def oneVowelOneLetter(firstL, secondL, vowel)
-    if (!firstL)
-      return placeAbove(secondL, vowel)
+  def one_vowel_one_letter(first_l, second_l, vowel)
+    if (!first_l)
+      return place_above(second_l, vowel)
     else
-      return placeBelow(firstL, vowel)
+      return place_below(first_l, vowel)
     end
   end
 
   # Places multiple vowels on and next to one viable letter, adding placeholders, returns success
   private
-  def multipleVowelsOneLetter(firstL, secondL, vowels)
-    if (!firstL)
+  def multiple_vowels_one_letter(first_l, second_l, vowels)
+    if (!first_l)
       # Place the last vowel above the available second letter
-      success = placeAbove(secondL, vowels[vowels.length - 1])
+      success = place_above(second_l, vowels[vowels.length - 1])
       if (!success)
         return false
       end
 
       # Add placeholders with vowels attached before the second letter
-      prevPlaceholder = nil
+      prev_placeholder = nil
       for i in 0..(vowels.length - 2)
-        if (!prevPlaceholder || i % 2 == 0)
+        if (!prev_placeholder || i % 2 == 0)
           # Make a new placeholder
-          nextIndex = !prevPlaceholder ? secondL.index - 0.5 : (prevPlaceholder.index + secondL.index) / 2
-          prevPlaceholder = Letter.new("sp", true, nextIndex)
-          @edigaulLetters[nextIndex] = prevPlaceholder
+          next_index = !prev_placeholder ? second_l.index - 0.5 : (prev_placeholder.index + second_l.index) / 2
+          prev_placeholder = Letter.new("sp", true, next_index)
+          @edigaul_letters[next_index] = prev_placeholder
 
-          return placeAbove(prevPlaceholder, vowels[i])
+          return place_above(prev_placeholder, vowels[i])
         else
-          return placeBelow(prevPlaceholder, vowels[i])
+          return place_below(prev_placeholder, vowels[i])
         end
       end
     else
       # Place the first vowel below the available first letter
-      success = placeBelow(firstL, vowels[0])
+      success = place_below(first_l, vowels[0])
       if (!success)
         return false
       end
 
       # Add placeholders with vowels attached after the first letter
-      prevPlaceholder = nil
+      prev_placeholder = nil
       for i in 1..(vowels.length - 1)
-        if (!prevPlaceholder || i % 2 == 1)
+        if (!prev_placeholder || i % 2 == 1)
           # Make a new placeholder
-          nextIndex = !prevPlaceholder ? firstL.index - 0.5 : (prevPlaceholder.index + firstL.index + 1) / 2
-          prevPlaceholder = Letter.new("sp", true, nextIndex)
-          @edigaulLetters[nextIndex] = prevPlaceholder
+          next_index = !prev_placeholder ? first_l.index - 0.5 : (prev_placeholder.index + first_l.index + 1) / 2
+          prev_placeholder = Letter.new("sp", true, next_index)
+          @edigaul_letters[next_index] = prev_placeholder
 
-          return placeAbove(prevPlaceholder, vowels[i])
+          return place_above(prev_placeholder, vowels[i])
         else
-          return placeBelow(prevPlaceholder, vowels[i])
+          return place_below(prev_placeholder, vowels[i])
         end
       end
     end
@@ -289,28 +289,28 @@ class Converter
 
   # Places multiple vowels between two non-viable letters, adding placeholders, returns success
   private
-  def multipleVowelsNoLetters(midIndex, vowels)
+  def multiple_vowels_no_letters(mid_index, vowels)
     # Add placeholders with vowels attached before the second letter
-    prevPlaceholder = nil
+    prev_placeholder = nil
     for i in 0..(vowels.length - 1)
-      if (!prevPlaceholder || i % 2 == 0)
+      if (!prev_placeholder || i % 2 == 0)
         # Make a new placeholder
-        nextIndex = !prevPlaceholder ? midIndex : (prevPlaceholder.index + midIndex + 0.5) / 2
-        prevPlaceholder = Letter.new("sp", true, nextIndex)
-        @edigaulLetters[nextIndex] = prevPlaceholder
+        next_index = !prev_placeholder ? mid_index : (prev_placeholder.index + mid_index + 0.5) / 2
+        prev_placeholder = Letter.new("sp", true, next_index)
+        @edigaul_letters[next_index] = prev_placeholder
 
-        return placeAbove(prevPlaceholder, vowels[i])
+        return place_above(prev_placeholder, vowels[i])
       else
-        return placeBelow(prevPlaceholder, vowels[i])
+        return place_below(prev_placeholder, vowels[i])
       end
     end
   end
 
   # Places a vowel mark above a consonant, returns success
   private
-  def placeAbove(l, vowel)
-    if (l.vowelAvailable(TOP))
-      l.setVowel(vowel, TOP)
+  def place_above(l, vowel)
+    if (l.vowel_available(TOP))
+      l.set_vowel(vowel, TOP)
       return true
     else
       return false
@@ -319,9 +319,9 @@ class Converter
 
   # Places a vowel mark below a consonant, returns success
   private
-  def placeBelow(l, vowel)
-    if (l.vowelAvailable(BOTTOM))
-      l.setVowel(vowel, BOTTOM)
+  def place_below(l, vowel)
+    if (l.vowel_available(BOTTOM))
+      l.set_vowel(vowel, BOTTOM)
       return true
     else
       return false
