@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get '/about' => 'static_pages#about'
   get '/help' => 'static_pages#help'
 
-  resources :tool_pages, :path => '/tool', :only => [:new, :create, :index]
+  resources :tool_pages, :path => '/tool', :only => [:create, :index]
 
   resources :words, :path => 'dictionary', :only => [:new, :create, :index, :destroy]
 

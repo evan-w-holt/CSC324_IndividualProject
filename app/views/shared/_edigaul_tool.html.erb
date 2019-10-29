@@ -1,3 +1,44 @@
-<p><%= @text %></p>
+<div class="letterButtons">
+  <%= button_to "b",  { letter: "#{@text}b," } %>
+  <%= button_to "d",  { letter: "#{@text}d," } %>
+  <%= button_to "f",  { letter: "#{@text}f," } %>
+  <%= button_to "g",  { letter: "#{@text}g," } %>
+  <%= button_to "h",  { letter: "#{@text}h," } %>
+  <%= button_to "j",  { letter: "#{@text}j," } %>
+  <%= button_to "k",  { letter: "#{@text}k," } %>
+  <%= button_to "l",  { letter: "#{@text}l," } %>
+  <%= button_to "m",  { letter: "#{@text}m," } %>
+  <%= button_to "n",  { letter: "#{@text}n," } %>
+  <%= button_to "p",  { letter: "#{@text}p," } %>
+  <%= button_to "s",  { letter: "#{@text}s," } %>
+  <%= button_to "t",  { letter: "#{@text}t," } %>
+  <%= button_to "v",  { letter: "#{@text}v," } %>
+  <%= button_to "w",  { letter: "#{@text}w," } %>
+  <%= button_to "y",  { letter: "#{@text}y," } %>
+  <%= button_to "z",  { letter: "#{@text}z," } %>
+  <%= button_to "sh", { letter: "#{@text}sh," } %>
+  <%= button_to "ch", { letter: "#{@text}ch," } %>
+  <%= button_to "th", { letter: "#{@text}th," } %>
+  <%= button_to "zh", { letter: "#{@text}zh," } %>
+  <%= button_to "x",  { letter: "#{@text}x," } %>
+</div>
+<div class="letterButtons">
+  <%= button_to "ah",  { letter: "#{@text}ah," } %>
+  <%= button_to "aah", { letter: "#{@text}aah," } %>
+  <%= button_to "ay",  { letter: "#{@text}ay," } %>
+  <%= button_to "aw",  { letter: "#{@text}aw," } %>
+  <%= button_to "uh",  { letter: "#{@text}uh," } %>
+  <%= button_to "uuh", { letter: "#{@text}uuh," } %>
+  <%= button_to "eh",  { letter: "#{@text}eh," } %>
+  <%= button_to "ee",  { letter: "#{@text}ee," } %>
+  <%= button_to "ih",  { letter: "#{@text}ih," } %>
+  <%= button_to "ie",  { letter: "#{@text}ie," } %>
+  <%= button_to "oh",  { letter: "#{@text}oh," } %>
+  <%= button_to "oo",  { letter: "#{@text}oo," } %>
 
-<%= button_to "k", letter: "k", method: :get %>
+  <%= button_to "Morpheme Break", { letter: "#{@text}/," }, { class: "morphemeBreak" } %>
+</div>
+<br>
+<a href="/tool">Clear</a>
+<br>
+<a href="/help">How to Use</a>

@@ -1,6 +1,4 @@
 class ToolPagesController < ApplicationController
-  
-  @running_text = ""
 
   def new
     @text = ""
@@ -8,8 +6,7 @@ class ToolPagesController < ApplicationController
 
   def create
     @text = letter_params
-    @running_text += @text
-    render :new
+    render :index
   end
 
   def index
