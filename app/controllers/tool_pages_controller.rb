@@ -3,6 +3,7 @@ class ToolPagesController < ApplicationController
   def new
     @text = ""
     @edigaul_text = ""
+    @edigaul_script = []
   end
 
   def create
@@ -10,6 +11,7 @@ class ToolPagesController < ApplicationController
 
     text_converter = Converter.new(@text)
     @edigaul_text = text_converter.get_edigaul
+    @edigaul_script = helpers.convert_rohkshe_string_into_array(@edigaul_text)
 
     render :index
   end
@@ -17,6 +19,7 @@ class ToolPagesController < ApplicationController
   def index
     @text = ""
     @edigaul_text = ""
+    @edigaul_script = []
   end
 
   private

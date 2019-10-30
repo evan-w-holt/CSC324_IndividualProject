@@ -24,6 +24,11 @@ class Letter
     return @consonant == "+/+"
   end
 
+  # Determines if this letter is an x (Xerithian Z, which cannot take vowel marks)
+  def is_x
+    return @consonant == "+x+"
+  end
+
   # Determines if a vowel is already filled
   # If is_top is true, checks top vowel, otherwise checks bottom vowel
   def vowel_available(is_top)

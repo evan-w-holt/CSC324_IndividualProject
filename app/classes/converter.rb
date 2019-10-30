@@ -56,8 +56,8 @@ class Converter
       ending = this_l.index.floor
       vowels = get_vowels(starting, ending)
 
-      first_l  = (!prev_l || prev_l.is_morpheme_break || prev_l.consonant == "x") ? nil : prev_l
-      second_l = (!this_l || this_l.is_morpheme_break || this_l.consonant == "x") ? nil : this_l
+      first_l  = (!prev_l || prev_l.is_morpheme_break || prev_l.is_x) ? nil : prev_l
+      second_l = (!this_l || this_l.is_morpheme_break || this_l.is_x) ? nil : this_l
 
       if (vowels.length > 0)
         success = assign_vowels(first_l, second_l, vowels, (starting.to_f + ending) / 2)
@@ -76,8 +76,10 @@ class Converter
     ending = -1
     vowels = get_vowels(starting, ending)
 
+    first_l = (!prev_l || prev_l.is_morpheme_break || prev_l.is_x) ? nil : prev_l
+
     if (vowels.length > 0)
-      success = assign_vowels(prev_l, nil, vowels, starting.to_f + 1)
+      success = assign_vowels(first_l, nil, vowels, starting.to_f + 1)
 
       if (!success)
         @error = "Error assigning vowel marks after consonant #{prev_l.consonant}"
@@ -109,23 +111,23 @@ class Converter
 
       if (ending != -1)
         for i in starting...ending
-          v = @english_vowels[i]
+          v = @english_vowels[i.to_f]
           
           if (v)
             vowels << v
-            @english_vowels.delete(i)
+            @english_vowels.delete(i.to_f)
           end
         end
       else
         # Get all remaining vowels
         i = starting
 
-        while (@english_vowels.length > 0)
-          v = @english_vowels[i]
+        while (@english_vowels.keys.length > 0)
+          v = @english_vowels[i.to_f]
 
           if (v)
             vowels << v
-            @english_vowels.delete(i)
+            @english_vowels.delete(i.to_f)
           end
 
           i += 1
@@ -219,9 +221,9 @@ class Converter
 
       # Add the last vowel
       if (prev_placeholder.vowel_available(BOTTOM))
-        return one_vowel_two_letters(prev_placeholder, second_l, vowels[vowels.length - 1])
+        return one_vowel_two_letters(prev_placeholder, second_l, vowels[-1])
       else
-        return place_above(second_l, vowels[vowels.length - 1])
+        return place_above(second_l, vowels[-1])
       end
     end
 
@@ -238,7 +240,7 @@ class Converter
     def multiple_vowels_one_letter(first_l, second_l, vowels)
       if (!first_l)
         # Place the last vowel above the available second letter
-        success = place_above(second_l, vowels[vowels.length - 1])
+        success = place_above(second_l, vowels[-1])
         if (!success)
           return false
         end

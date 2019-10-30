@@ -1,3 +1,16 @@
+<div class="toolEdigaulScript">
+  <span class="edigaulTextBox">
+    <span class="edigaulWord">
+      <% @edigaul_script.each do |letter| %>
+      <span class="edigaulUnit">
+        <%= get_vowel_img(letter[0], "topVowelImgLarge") %>
+        <%= image_tag ("#{letter[1]}.png"), class: "consonantImgLarge" %>
+        <%= get_vowel_img(letter[2], "bottomVowelImgLarge") %>
+      </span>
+      <% end %>
+    </span>
+  </span>
+</div>
 <div class="toolInProgressText">
   <p><i>String form: </i><b><%= @edigaul_text %>|</b></p>
 </div>
