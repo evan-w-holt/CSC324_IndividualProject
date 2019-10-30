@@ -1,6 +1,8 @@
 # I originally wrote this class in Java in January 2019
 class Letter
 
+  attr_reader :consonant, :uptail, :index
+
   def initialize(consonant, uptail, index)
     @consonant = "+#{consonant}+"
     @uptail = uptail
@@ -19,7 +21,7 @@ class Letter
 
   # Determines if this letter is a morpheme break
   def is_morpheme_break
-    return @consonant == "/"
+    return @consonant == "+/+"
   end
 
   # Determines if a vowel is already filled

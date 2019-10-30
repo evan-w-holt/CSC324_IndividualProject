@@ -9,7 +9,7 @@ class ToolPagesController < ApplicationController
     @text = letter_params
 
     text_converter = Converter.new(@text)
-    @edigaul_text = text_converter.getEdigaul
+    @edigaul_text = text_converter.get_edigaul
 
     render :index
   end
@@ -21,7 +21,7 @@ class ToolPagesController < ApplicationController
 
   private
   def letter_params
-    params.require(:letter)
+    params.require(:text)
   end
 
 end

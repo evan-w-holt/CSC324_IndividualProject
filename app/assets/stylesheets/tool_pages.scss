@@ -10,10 +10,10 @@ div.letterButtons {
   display: flex;
   justify-content: center;
   align-items: center;
-  input {
+  form {
     margin: 2px;
-  }
-  input.morphemeBreak {
-    margin-left: 20px;
+    input.morphemeBreak {
+      margin-left: 20px;
+    }
   }
 }
