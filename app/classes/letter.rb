@@ -1,4 +1,4 @@
-# I originally wrote this class in Java in January 2019
+# I originally wrote this class in Java in December 2018
 class Letter
 
   attr_reader :consonant, :uptail, :index

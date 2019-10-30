@@ -8,7 +8,7 @@ class ToolPagesController < ApplicationController
 
   def create
     @text = letter_params
-
+    
     text_converter = Converter.new(@text)
     @edigaul_text = text_converter.get_edigaul
     @edigaul_script = helpers.convert_rohkshe_string_into_array(@edigaul_text)

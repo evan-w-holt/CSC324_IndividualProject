@@ -1,4 +1,4 @@
-# I originally wrote this class in Java in January 2019
+# I originally wrote this class in Java in December 2018
 # It took one ugly string as input and spat out the string values I use in the
 # words database to store the Rohkshe data (Ex: k,uh,/,th,n,ee => [+k+uh][+th+][+n+ee])
 class Converter
@@ -60,7 +60,7 @@ class Converter
       second_l = (!this_l || this_l.is_morpheme_break || this_l.is_x) ? nil : this_l
 
       if (vowels.length > 0)
-        success = assign_vowels(first_l, second_l, vowels, (starting.to_f + ending) / 2)
+        success = assign_vowels(first_l, second_l, vowels, (starting.to_f + ending.to_f) / 2)
 
         if (!success)
           @error = "Error assigning vowel marks between consonants #{prev_l.consonant} and #{this_l.consonant}"
@@ -250,13 +250,21 @@ class Converter
         for i in 0...(vowels.length - 1)
           if (!prev_placeholder || i % 2 == 0)
             # Make a new placeholder
-            next_index = !prev_placeholder ? second_l.index - 0.5 : (prev_placeholder.index + second_l.index) / 2
+            next_index = !prev_placeholder ?
+              second_l.index.to_f - 0.5 :
+              (prev_placeholder.index.to_f + second_l.index.to_f) / 2
             prev_placeholder = Letter.new("sp", true, next_index)
             @edigaul_letters[next_index] = prev_placeholder
 
-            return place_above(prev_placeholder, vowels[i])
+            success = place_above(prev_placeholder, vowels[i])
+            if (!success)
+              return false
+            end
           else
-            return place_below(prev_placeholder, vowels[i])
+            success = place_below(prev_placeholder, vowels[i])
+            if (!success)
+              return false
+            end
           end
         end
       else
@@ -271,16 +279,26 @@ class Converter
         for i in 1...vowels.length
           if (!prev_placeholder || i % 2 == 1)
             # Make a new placeholder
-            next_index = !prev_placeholder ? first_l.index - 0.5 : (prev_placeholder.index + first_l.index + 1) / 2
+            next_index = !prev_placeholder ?
+              first_l.index.to_f + 0.5 :
+              (prev_placeholder.index.to_f + first_l.index.to_f + 1) / 2
             prev_placeholder = Letter.new("sp", true, next_index)
             @edigaul_letters[next_index] = prev_placeholder
 
-            return place_above(prev_placeholder, vowels[i])
+            success = place_above(prev_placeholder, vowels[i])
+            if (!success)
+              return false
+            end
           else
-            return place_below(prev_placeholder, vowels[i])
+            success = place_below(prev_placeholder, vowels[i])
+            if (!success)
+              return false
+            end
           end
         end
       end
+
+      return true
     end
 
     # Places multiple vowels between two non-viable letters, adding placeholders, returns success
@@ -290,15 +308,25 @@ class Converter
       for i in 0...vowels.length
         if (!prev_placeholder || i % 2 == 0)
           # Make a new placeholder
-          next_index = !prev_placeholder ? mid_index : (prev_placeholder.index + mid_index + 0.5) / 2
+          next_index = !prev_placeholder ?
+            mid_index.to_f :
+            (prev_placeholder.index.to_f + mid_index.to_f + 0.5) / 2
           prev_placeholder = Letter.new("sp", true, next_index)
           @edigaul_letters[next_index] = prev_placeholder
 
-          return place_above(prev_placeholder, vowels[i])
+          success = place_above(prev_placeholder, vowels[i])
+          if (!success)
+            return false
+          end
         else
-          return place_below(prev_placeholder, vowels[i])
+          success = place_below(prev_placeholder, vowels[i])
+          if (!success)
+            return false
+          end
         end
       end
+
+      return true
     end
 
     # Places a vowel mark above a consonant, returns success
