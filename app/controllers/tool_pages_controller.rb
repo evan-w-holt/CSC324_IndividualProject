@@ -8,6 +8,10 @@ class ToolPagesController < ApplicationController
 
   def create
     @text = letter_params
+
+    if (@text[-1] == "-")
+      backspace
+    end
     
     text_converter = Converter.new(@text)
     @edigaul_text = text_converter.get_edigaul
@@ -23,8 +27,20 @@ class ToolPagesController < ApplicationController
   end
 
   private
-  def letter_params
-    params.require(:text)
-  end
+    def letter_params
+      params.require(:text)
+    end
 
+    def backspace
+      # Remove the backspace marker and a morpheme break if that is the last letter
+      # Remove the morpheme break to prevent "nothing happened" situation if morpheme break was last letter
+      @text = @text.delete_suffix(",-").delete_suffix(",/")
+
+      last_comma = @text.rindex(",")
+      if (last_comma)
+        @text = @text[0..last_comma]
+      else
+        @text = ""
+      end
+    end
 end

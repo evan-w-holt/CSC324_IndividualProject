@@ -36,8 +36,10 @@
   <%= button_to "oo",  { text: "#{@text}oo," } %>
   <%= button_to "ih",  { text: "#{@text}ih," } %>
   <%= button_to "ie",  { text: "#{@text}ie," } %>
-
-  <%= button_to "Morpheme Break", { text: "#{@text}/," }, { class: "morphemeBreak" } %>
+</div>
+<div class="letterButtons">
+  <%= button_to "Morpheme Break", { text: "#{@text}/," } %>
+  <%= button_to "Backspace", { text: "#{@text}-" } %>
 </div>
 <br>
 <a href="/tool">Clear</a>
