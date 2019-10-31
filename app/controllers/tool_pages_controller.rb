@@ -32,9 +32,11 @@ class ToolPagesController < ApplicationController
     end
 
     def backspace
-      # Remove the backspace marker and a morpheme break if that is the last letter
-      # Remove the morpheme break to prevent "nothing happened" situation if morpheme break was last letter
-      @text = @text.delete_suffix(",-").delete_suffix(",/")
+      # Remove the backspace marker and any morpheme breaks that are the last letters
+      # Remove the morpheme breaks to prevent "nothing happened" situation if morpheme breaks are at the end
+      @text = @text.delete_suffix(",-")
+      while (@text.delete_suffix!(",/"))
+      end
 
       last_comma = @text.rindex(",")
       if (last_comma)

@@ -7,7 +7,9 @@ div.toolInProgressText {
 }
 
 div.letterButtons {
+  margin-bottom: 0.5em;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   form {
