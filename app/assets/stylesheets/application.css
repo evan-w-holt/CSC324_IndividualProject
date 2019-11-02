@@ -92,3 +92,24 @@ img.bottomVowelImg {
   margin: auto;
   transform: scaleY(-1);
 }
+
+img.consonantImgLarge {
+  max-height: 75px;
+}
+
+img.topVowelImgLarge {
+  max-height: 75px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+img.bottomVowelImgLarge {
+  max-height: 75px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  transform: scaleY(-1);
+}
