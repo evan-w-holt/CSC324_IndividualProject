@@ -1,48 +1,50 @@
 <% provide(:title, "Home") %>
 
-<center>
-  <h3>Welcome to the Edigaul Abugida!</h3>
+<main>
+  <center>
+    <h3>Welcome to the Edigaul Abugida!</h3>
 
-  <span class="edigaulTextBox">
-    <% @this_is_edigaul_and_rohkshe.each do |word| %>
-    <span class="edigaulWord">
-      <% word.each do |letter| %>
-      <span class="edigaulUnit">
-        <%= get_vowel_img(letter[0], "topVowelImg") %>
-        <%= image_tag ("#{letter[1]}.png"), class: "consonantImg" %>
-        <%= get_vowel_img(letter[2], "bottomVowelImg") %>
+    <span class="edigaulTextBox">
+      <% @this_is_edigaul_and_rohkshe.each do |word| %>
+      <span class="edigaulWord">
+        <% word.each do |letter| %>
+        <span class="edigaulUnit">
+          <%= get_vowel_img(letter[0], "topVowelImg") %>
+          <%= image_tag ("#{letter[1]}.png"), class: "consonantImg" %>
+          <%= get_vowel_img(letter[2], "bottomVowelImg") %>
+        </span>
+        <% end %>
       </span>
       <% end %>
     </span>
-    <% end %>
-  </span>
 
-  <h4>Random Rohkshe Word</h4>
-  <table>
-    <tr>
-      <td>Rohkshe Script</td>
-      <td>English Transliteration</td>
-      <td>English Translation</td>
-    </tr>
-    <tr>
-      <td>
-        <span class="edigaulTextBox">
-          <span class="edigaulWord">
-            <% @rohkshe.each do |letter| %>
-            <span class="edigaulUnit">
-              <%= get_vowel_img(letter[0], "topVowelImg") %>
-              <%= image_tag ("#{letter[1]}.png"), class: "consonantImg" %>
-              <%= get_vowel_img(letter[2], "bottomVowelImg") %>
+    <h4>Random Rohkshe Word</h4>
+    <table>
+      <tr>
+        <th>Rohkshe Script</th>
+        <th>English Transliteration</th>
+        <th>English Translation</th>
+      </tr>
+      <tr>
+        <td>
+          <span class="edigaulTextBox">
+            <span class="edigaulWord">
+              <% @rohkshe.each do |letter| %>
+              <span class="edigaulUnit">
+                <%= get_vowel_img(letter[0], "topVowelImg") %>
+                <%= image_tag ("#{letter[1]}.png"), class: "consonantImg" %>
+                <%= get_vowel_img(letter[2], "bottomVowelImg") %>
+              </span>
+              <% end %>
             </span>
-            <% end %>
           </span>
-        </span>
-      </td>
-      <td><%= @transliteration %></td>
-      <td><%= @translation %></td>
-    </tr>
-  </table>
-  <a href="/">Get another word</a>
-  <br><br>
-  <a href="/tool">To the Edigaul Tool</a>
-</center>
+        </td>
+        <td><%= @transliteration %></td>
+        <td><%= @translation %></td>
+      </tr>
+    </table>
+    <a href="/">Get another word</a>
+    <br><br>
+    <a href="/tool">To the Edigaul Tool</a>
+  </center>
+</main>

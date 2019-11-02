@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title><%= yield(:title) %> | Edigaul Abugida</title>
     <%= csrf_meta_tags %>
@@ -9,28 +9,28 @@
   </head>
 
   <body>
-    <div class="navbarBox">
+    <nav class="navbarBox">
       <a href="/" class="navbarTextButton">
-        <h2 class="navbarText">Edigaul Abugida</h2>
+        <h1 class="navbarBigText">Edigaul Abugida</h1>
       </a>
       <div class="navbarRightButtons">
         <a href="/" class="navbarTextButton">
-          <h4 class="navbarText">Home</h4>
+          <h2 class="navbarText">Home</h2>
         </a>
         <a href="/tool" class="navbarTextButton">
-          <h4 class="navbarText">Tool</h4>
+          <h2 class="navbarText">Tool</h2>
         </a>
         <a href="/dictionary" class="navbarTextButton">
-          <h4 class="navbarText">Dictionary</h4>
+          <h2 class="navbarText">Dictionary</h2>
         </a>
         <a href="/about" class="navbarTextButton">
-          <h4 class="navbarText">About</h4>
+          <h2 class="navbarText">About</h2>
         </a>
         <a href="/help" class="navbarTextButton">
-          <h4 class="navbarText">Help</h4>
+          <h2 class="navbarText">Help</h2>
         </a>
       </div>
-    </div>
+    </nav>
 
     <%= yield %>
   </body>
