@@ -18,7 +18,7 @@ html {
   background-color: rgb(229, 207, 180);
 }
 
-div.navbarBox {
+nav.navbarBox {
   width: 100%;
   min-height: 3rem;
   display: flex;
@@ -48,13 +48,21 @@ a.navbarTextButton {
 .navbarText {
   margin: 0 1rem;
   color: black;
+  font-size: 12pt;
 }
 
-table, td {
+.navbarBigText {
+  margin: 0 1rem;
+  color: black;
+  font-size: 18pt;
+}
+
+table, td, th {
   padding: 5px;
   border: 1.5px solid black;
   border-collapse: collapse;
   text-align: center;
+  font-weight: normal;
 }
 
 span.edigaulTextBox {
