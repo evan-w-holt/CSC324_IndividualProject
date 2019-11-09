@@ -59,15 +59,14 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
   test "random word table should exist with headers" do
     get @home_url
 
-    num_rows = 2
     num_columns = 3
 
-    assert_select "td", num_rows * num_columns
+    assert_select "td", num_columns
 
     # Test that the header row contains the right things
-    assert_select "td", {:text => "Rohkshe Script", :count => 1}
-    assert_select "td", {:text => "English Transliteration", :count => 1}
-    assert_select "td", {:text => "English Translation", :count => 1}
+    assert_select "th", {:text => "Rohkshe Script", :count => 1}
+    assert_select "th", {:text => "English Transliteration", :count => 1}
+    assert_select "th", {:text => "English Translation", :count => 1}
   end
 
   # Home page edigaul tests ==================================================
