@@ -18,6 +18,10 @@ html {
   background-color: rgb(229, 207, 180);
 }
 
+p, h4, li {
+  font-size: 13pt;
+}
+
 nav.navbarBox {
   width: 100%;
   min-height: 3rem;

@@ -26,15 +26,15 @@ class WordsControllerTest < ActionDispatch::IntegrationTest
   test "dictionary should have a row for every word" do
     get @dictionary_url
 
-    num_rows =  Word.all.count + 1 # plus 1 for the header row
+    num_rows =  Word.all.count
     num_columns = 4
 
-    assert_select "td", num_rows * num_columns - 1 # minus 1 as the header has only three rows
+    assert_select "td", num_rows * num_columns
 
     # Test that the header row contains the right things
-    assert_select "td", {:text => "Rohkshe Script", :count => 1}
-    assert_select "td", {:text => "English Transliteration", :count => 1}
-    assert_select "td", {:text => "English Translation", :count => 1}
+    assert_select "th", {:text => "Rohkshe Script", :count => 1}
+    assert_select "th", {:text => "English Transliteration", :count => 1}
+    assert_select "th", {:text => "English Translation", :count => 1}
   end
 
   # Dictionary add word tests ==================================================
