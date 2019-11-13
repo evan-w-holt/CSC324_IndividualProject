@@ -9,28 +9,7 @@
   </head>
 
   <body>
-    <nav class="navbarBox">
-      <a href="/" class="navbarTextButton">
-        <h1 class="navbarBigText">Edigaul Abugida</h1>
-      </a>
-      <div class="navbarRightButtons">
-        <a href="/" class="navbarTextButton">
-          <h2 class="navbarText">Home</h2>
-        </a>
-        <a href="/tool" class="navbarTextButton">
-          <h2 class="navbarText">Tool</h2>
-        </a>
-        <a href="/dictionary" class="navbarTextButton">
-          <h2 class="navbarText">Dictionary</h2>
-        </a>
-        <a href="/about" class="navbarTextButton">
-          <h2 class="navbarText">About</h2>
-        </a>
-        <a href="/help" class="navbarTextButton">
-          <h2 class="navbarText">Help</h2>
-        </a>
-      </div>
-    </nav>
+    <%= render "shared/navbar" %>
 
     <%= yield %>
   </body>
