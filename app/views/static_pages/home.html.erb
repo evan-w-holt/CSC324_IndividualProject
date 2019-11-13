@@ -43,8 +43,8 @@
         <td><%= @translation %></td>
       </tr>
     </table>
-    <a href="/">Get another word</a>
-    <br><br>
+    <%= button_to "Get another word", "/", :method => :get %>
+    <br>
     <a href="/tool">To the Edigaul Tool</a>
   </center>
 </main>

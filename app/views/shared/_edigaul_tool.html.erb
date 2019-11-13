@@ -40,8 +40,7 @@
 <div class="letterButtons">
   <%= button_to "Morpheme Break", { text: "#{@text}/," } %>
   <%= button_to "Backspace", { text: "#{@text}-" } %>
+  <%= button_to "Clear", "/tool", :method => :get %>
 </div>
-<br>
-<a href="/tool">Clear</a>
 <br>
 <a href="/help">How to Use</a>
