@@ -18,6 +18,10 @@ html {
   background-color: rgb(229, 207, 180);
 }
 
+body {
+  margin-bottom: 5rem;
+}
+
 p, h4, li {
   font-size: 13pt;
 }
