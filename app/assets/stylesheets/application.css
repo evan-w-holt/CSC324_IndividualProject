@@ -129,3 +129,12 @@ img.bottomVowelImgLarge {
   margin: auto;
   transform: scaleY(-1);
 }
+
+.signature {
+  margin: 0.5vh;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 5vh;
+  height: 5vh;
+}
