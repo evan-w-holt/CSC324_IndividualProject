@@ -15,7 +15,12 @@
  */
 
 html {
+  background-image: url("/assets/background.webp");
+  background-repeat: repeat-y;
+  background-position: center;
+  background-size: cover;
   background-color: rgb(229, 207, 180);
+  height: 100%;
 }
 
 body {
@@ -33,6 +38,10 @@ nav.navbarBox {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+  background-image: url("/assets/header-background.webp");
+  background-repeat: repeat-x;
+  background-position-x: left;
+  background-size: contain;
   background-color: rgba(0, 0, 0, 0.15);
   border-width: 2px;
   border-style: solid;
