@@ -24,6 +24,8 @@ html {
 }
 
 body {
+  padding: 0;
+  margin: 0;
   margin-bottom: 5rem;
 }
 
@@ -44,7 +46,7 @@ nav.navbarBox {
   background-size: contain;
   background-color: rgba(0, 0, 0, 0.15);
   border-width: 2px;
-  border-style: solid;
+  border-style: none none solid none;
   border-color: black;
 }
 
