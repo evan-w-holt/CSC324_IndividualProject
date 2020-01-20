@@ -8,7 +8,7 @@ class StaticPagesController < ApplicationController
     :ocean     => ["muuthni", "[+m+uuh][+th+][+n+ee]"],
     :'to have' => ["helai",   "[+h+][eh+l+ie]"],
     :'to be'   => ["ekai",    "[eh+k+ie]"],
-    :hello     => ["oyseh",   "[oh+y+][+s+eh]"],
+    :hello     => ["osuuh",   "[oh+s+uuh]"],
     :goodbye   => ["vastin",  "[+v+][ah+s+][+t+][ih+n+]"],
     :I         => ["zai",     "[+z+ie]"],
     :you       => ["zo",      "[+z+oh]"],
